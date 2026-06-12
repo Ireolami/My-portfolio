@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -7,32 +8,41 @@ export function AboutTeaser() {
     <section className="section bg-bg" aria-labelledby="about-teaser-heading">
       <div className="container-content">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-          {/* Photo placeholder */}
+          {/* Photo */}
           <Reveal>
             <div className="relative mx-auto max-w-sm">
-              <div
-                className="relative aspect-[4/5] rounded-2xl border border-border bg-bg-elevated overflow-hidden"
-                aria-label="Portrait of Olayele Awujoola"
-              >
-                {/* TODO-CONTENT: owner to supply professional photo */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-mono text-xs text-text-muted">[photo pending]</span>
-                </div>
-
-                {/* Decorative corner accent */}
+              <div className="relative aspect-[4/5] rounded-2xl border border-border overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Olayele Gbenga Awujoola — Data Analyst and AI Automation Engineer, Lagos Nigeria"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 90vw, 400px"
+                  priority
+                />
+                {/* Subtle gradient overlay at bottom for text legibility */}
                 <div
-                  className="absolute -bottom-1 -right-1 h-24 w-24 rounded-full opacity-20"
-                  style={{ background: "radial-gradient(circle, var(--accent), transparent)" }}
+                  className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+                  style={{
+                    background: "linear-gradient(to top, rgba(10,10,11,0.5), transparent)",
+                  }}
                   aria-hidden="true"
                 />
               </div>
 
-              {/* HMC Tech tag */}
-              <div className="absolute -bottom-4 -right-4 rounded-xl border border-border bg-bg-elevated p-3 shadow-lg">
+              {/* HMC Tech floating tag */}
+              <div className="absolute -bottom-4 -right-4 rounded-xl border border-border bg-bg-elevated p-3 shadow-xl backdrop-blur-sm">
                 <p className="text-xs font-mono text-text-muted">Founder</p>
                 <p className="text-sm font-semibold text-text-primary">HMC Tech</p>
                 <p className="text-xs text-text-muted">Lagos, Nigeria</p>
               </div>
+
+              {/* Accent glow behind card */}
+              <div
+                className="absolute -z-10 -bottom-6 -right-6 h-48 w-48 rounded-full opacity-15 blur-2xl"
+                style={{ background: "var(--accent)" }}
+                aria-hidden="true"
+              />
             </div>
           </Reveal>
 
