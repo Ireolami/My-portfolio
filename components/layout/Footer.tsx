@@ -51,7 +51,7 @@ export function Footer() {
                 href="/"
                 className="font-display text-xl font-semibold text-text-primary hover:text-accent transition-colors"
               >
-                Ireola
+                Olayele Awujoola
               </Link>
               <p className="mt-2 text-sm text-text-muted leading-relaxed">
                 Data analyst and AI automation engineer. Building systems that ship and produce

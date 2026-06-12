@@ -41,9 +41,9 @@ export function Header() {
         <Link
           href="/"
           className="font-display text-lg font-semibold text-text-primary hover:text-accent transition-colors focus-visible:outline-accent"
-          aria-label="Ireola — home"
+          aria-label="Olayele Awujoola — home"
         >
-          Ireola
+          Olayele Awujoola
         </Link>
 
         {/* Desktop nav */}

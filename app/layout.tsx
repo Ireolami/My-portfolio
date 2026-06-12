@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     "n8n",
     "machine learning",
     "WhatsApp AI",
+    "Olayele Gbenga Awujoola",
     "Olayele Awujoola",
     "Ireola",
   ],

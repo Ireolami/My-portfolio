@@ -59,7 +59,7 @@ export function MobileMenu() {
               aria-label="Mobile navigation"
             >
               <div className="flex items-center justify-between mb-8">
-                <span className="font-display font-semibold text-text-primary">Ireola</span>
+                <span className="font-display font-semibold text-text-primary">Olayele Awujoola</span>
                 <button
                   className="flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary hover:text-text-primary hover:bg-bg-subtle transition-colors"
                   onClick={() => setOpen(false)}
