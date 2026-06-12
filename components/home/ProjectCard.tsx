@@ -5,28 +5,11 @@ import Link from "next/link";
 import { ArrowRight, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Chip, StatusDot, StackChip } from "@/components/ui/Chip";
+import type { Project, Category } from "@/lib/projects";
 
-type Category = "ai" | "data" | "auto" | "dev" | "research";
-type Status = "production" | "in-build" | "case-study" | "research";
-
-interface MetricChip {
-  value: string;
-  label: string;
-}
-
-interface ProjectCardProps {
-  title: string;
-  problem: string;
-  solution: string;
-  category: Category;
-  status: Status;
-  metrics: MetricChip[];
-  stack: string[];
-  slug: string;
-  githubUrl?: string;
-  featured?: boolean;
+type ProjectCardProps = Omit<Project, "shortTitle" | "caseStudy" | "demoUrl"> & {
   visualBg?: string;
-}
+};
 
 const categoryAccent: Record<Category, string> = {
   ai: "var(--cat-ai)",
