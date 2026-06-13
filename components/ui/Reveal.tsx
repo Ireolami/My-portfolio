@@ -18,15 +18,15 @@ export function Reveal({ children, className, delay = 0, duration = 0.3 }: Revea
   const inView = useInView(ref, { once: true, margin: "-20% 0px" });
   const prefersReducedMotion = useReducedMotion();
 
-  const variants: Variants = prefersReducedMotion
-    ? {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 },
-      }
-    : {
-        hidden: { opacity: 0, y: 16 },
-        visible: { opacity: 1, y: 0 },
-      };
+  // Reduced-motion users get content immediately, no fade, no scroll gating.
+  if (prefersReducedMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
+  const variants: Variants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <m.div
@@ -55,6 +55,10 @@ export function RevealGroup({
   const inView = useInView(ref, { once: true, margin: "-20% 0px" });
   const prefersReducedMotion = useReducedMotion();
 
+  if (prefersReducedMotion) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <m.div
       ref={ref}
@@ -64,7 +68,7 @@ export function RevealGroup({
       variants={{
         hidden: {},
         visible: {
-          transition: { staggerChildren: prefersReducedMotion ? 0 : stagger },
+          transition: { staggerChildren: stagger },
         },
       }}
     >

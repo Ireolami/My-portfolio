@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Chip, StatusDot, StackChip } from "@/components/ui/Chip";
 import type { Project, Category } from "@/lib/projects";
 
-type ProjectCardProps = Omit<Project, "shortTitle" | "caseStudy" | "demoUrl"> & {
+type ProjectCardProps = Omit<Project, "shortTitle" | "demoUrl"> & {
   visualBg?: string;
   image?: string;
 };
@@ -34,6 +34,7 @@ export function ProjectCard({
   featured = false,
   visualBg,
   image,
+  caseStudy = false,
 }: ProjectCardProps) {
   const accent = categoryAccent[category];
 
@@ -149,19 +150,38 @@ export function ProjectCard({
 
         {/* CTAs */}
         <div className="flex items-center gap-3 pt-1 mt-auto">
-          <Link
-            href={`/projects/${slug}`}
-            className={cn(
-              "inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-150",
-              "text-text-secondary hover:text-accent",
-              "group/link"
-            )}
-          >
-            Read case study
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
-          </Link>
+          {caseStudy ? (
+            <Link
+              href={`/projects/${slug}`}
+              className={cn(
+                "inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-150",
+                "text-text-secondary hover:text-accent",
+                "group/link"
+              )}
+            >
+              Read case study
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
+            </Link>
+          ) : githubUrl ? (
+            <Link
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-150",
+                "text-text-secondary hover:text-accent",
+                "group/link"
+              )}
+            >
+              <Github className="h-4 w-4" />
+              View on GitHub
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
+            </Link>
+          ) : (
+            <span className="text-sm text-text-muted">Case study coming soon</span>
+          )}
 
-          {githubUrl && (
+          {caseStudy && githubUrl && (
             <Link
               href={githubUrl}
               target="_blank"

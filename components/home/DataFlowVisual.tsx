@@ -1,155 +1,172 @@
 "use client";
 
-import { m } from "framer-motion";
-import { useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 
-const nodes = [
-  { id: "n1", cx: 200, cy: 60, r: 6, label: "IoT" },
-  { id: "n2", cx: 340, cy: 110, r: 10, label: "Pipeline" },
-  { id: "n3", cx: 100, cy: 160, r: 8, label: "SQL" },
-  { id: "n4", cx: 260, cy: 200, r: 7, label: "ML" },
-  { id: "n5", cx: 420, cy: 220, r: 12, label: "AI Agent", primary: true },
-  { id: "n6", cx: 150, cy: 280, r: 6, label: "n8n" },
-  { id: "n7", cx: 320, cy: 310, r: 9, label: "API" },
-  { id: "n8", cx: 460, cy: 350, r: 7, label: "WhatsApp" },
-  { id: "n9", cx: 80, cy: 360, r: 6, label: "Dashboard" },
-  { id: "n10", cx: 220, cy: 390, r: 8, label: "GPT-4o" },
+type Node = {
+  id: string;
+  cx: number;
+  cy: number;
+  r: number;
+  label: string;
+  color: string;
+  primary?: boolean;
+};
+
+// Nodes laid out as a left-to-right data → AI → delivery pipeline.
+const nodes: Node[] = [
+  { id: "iot", cx: 70, cy: 90, r: 7, label: "IoT", color: "var(--cat-data)" },
+  { id: "sql", cx: 70, cy: 230, r: 7, label: "SQL", color: "var(--cat-data)" },
+  { id: "etl", cx: 70, cy: 360, r: 7, label: "ETL", color: "var(--cat-data)" },
+  { id: "pipeline", cx: 220, cy: 160, r: 10, label: "Pipeline", color: "var(--accent)" },
+  { id: "ml", cx: 220, cy: 300, r: 9, label: "ML", color: "var(--cat-research)" },
+  { id: "agent", cx: 370, cy: 230, r: 15, label: "AI Agent", color: "var(--accent)", primary: true },
+  { id: "n8n", cx: 470, cy: 90, r: 8, label: "n8n", color: "var(--cat-auto)" },
+  { id: "whatsapp", cx: 470, cy: 360, r: 8, label: "WhatsApp", color: "var(--cat-ai)" },
 ];
 
-const edges = [
-  ["n1", "n2"], ["n1", "n3"], ["n2", "n4"], ["n2", "n5"],
-  ["n3", "n4"], ["n3", "n6"], ["n4", "n5"], ["n4", "n7"],
-  ["n5", "n7"], ["n5", "n8"], ["n6", "n9"], ["n6", "n10"],
-  ["n7", "n8"], ["n7", "n10"], ["n9", "n10"],
+const edges: [string, string][] = [
+  ["iot", "pipeline"],
+  ["sql", "pipeline"],
+  ["sql", "ml"],
+  ["etl", "ml"],
+  ["pipeline", "agent"],
+  ["ml", "agent"],
+  ["agent", "n8n"],
+  ["agent", "whatsapp"],
 ];
 
-function getNode(id: string) {
-  return nodes.find((n) => n.id === id)!;
-}
+const byId = (id: string) => nodes.find((n) => n.id === id)!;
 
 export function DataFlowVisual() {
-  const prefersReducedMotion = useReducedMotion();
+  const reduce = useReducedMotion();
 
   return (
-    <div className="relative w-full max-w-[500px] mx-auto opacity-90" aria-hidden="true">
-      <svg
-        viewBox="0 0 520 440"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
-      >
-        <defs>
-          <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
-          </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
+    <div className="relative w-full max-w-[500px]" aria-hidden="true">
+      {/* Contained panel so the visual reads as deliberate, not empty space */}
+      <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-elevated/70 p-3 backdrop-blur-sm card-shadow">
+        {/* Panel header */}
+        <div className="mb-1 flex items-center justify-between px-2 pt-1">
+          <span className="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-text-muted">
+            system map
+          </span>
+          <span className="flex gap-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-cat-data" />
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="h-1.5 w-1.5 rounded-full bg-cat-auto" />
+          </span>
+        </div>
 
-        {/* Background radial glow */}
-        <ellipse cx="260" cy="220" rx="220" ry="180" fill="url(#bg-glow)" />
+        {/* Grid mesh */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
 
-        {/* Edges */}
-        {edges.map(([a, b]) => {
-          const from = getNode(a);
-          const to = getNode(b);
-          return (
-            <line
-              key={`${a}-${b}`}
-              x1={from.cx}
-              y1={from.cy}
-              x2={to.cx}
-              y2={to.cy}
-              stroke="var(--border)"
-              strokeWidth="1"
-              opacity="0.6"
-            />
-          );
-        })}
+        <svg viewBox="0 0 540 450" fill="none" className="relative w-full">
+          <defs>
+            <linearGradient id="edge-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="var(--cat-data)" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.55" />
+            </linearGradient>
+            <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
 
-        {/* Animated edge pulses */}
-        {!prefersReducedMotion &&
-          edges.slice(0, 6).map(([a, b], i) => {
-            const from = getNode(a);
-            const to = getNode(b);
+          {/* Edges */}
+          {edges.map(([a, b]) => {
+            const from = byId(a);
+            const to = byId(b);
             return (
-              <m.circle
-                key={`pulse-${a}-${b}`}
-                r="2.5"
-                fill="var(--accent)"
-                opacity="0.8"
-                initial={{ cx: from.cx, cy: from.cy }}
-                animate={{ cx: [from.cx, to.cx], cy: [from.cy, to.cy] }}
-                transition={{
-                  duration: 2,
-                  delay: i * 0.4,
-                  repeat: Infinity,
-                  repeatDelay: 3,
-                  ease: "easeInOut",
-                }}
+              <line
+                key={`${a}-${b}`}
+                x1={from.cx}
+                y1={from.cy}
+                x2={to.cx}
+                y2={to.cy}
+                stroke="url(#edge-grad)"
+                strokeWidth="1.5"
               />
             );
           })}
 
-        {/* Nodes */}
-        {nodes.map((node) => (
-          <g key={node.id}>
-            {/* Outer pulse ring on primary node */}
-            {node.primary && !prefersReducedMotion && (
-              <m.circle
+          {/* Traveling pulses along edges into the agent */}
+          {!reduce &&
+            edges.map(([a, b], i) => {
+              const from = byId(a);
+              const to = byId(b);
+              return (
+                <m.circle
+                  key={`pulse-${a}-${b}`}
+                  r="3"
+                  fill="var(--accent)"
+                  initial={{ cx: from.cx, cy: from.cy, opacity: 0 }}
+                  animate={{
+                    cx: [from.cx, to.cx],
+                    cy: [from.cy, to.cy],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 1.8,
+                    delay: i * 0.35,
+                    repeat: Infinity,
+                    repeatDelay: 2.2,
+                    ease: "easeInOut",
+                  }}
+                />
+              );
+            })}
+
+          {/* Nodes */}
+          {nodes.map((node) => (
+            <g key={node.id}>
+              {node.primary && !reduce && (
+                <m.circle
+                  cx={node.cx}
+                  cy={node.cy}
+                  r={node.r}
+                  fill="none"
+                  stroke={node.color}
+                  strokeWidth="1.5"
+                  initial={{ opacity: 0.5, scale: 1 }}
+                  animate={{ opacity: 0, scale: 2 }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
+                  style={{ transformOrigin: `${node.cx}px ${node.cy}px` }}
+                />
+              )}
+              <circle
                 cx={node.cx}
                 cy={node.cy}
-                r={node.r + 8}
-                stroke="var(--accent)"
-                strokeWidth="1"
-                fill="none"
-                initial={{ opacity: 0.6, scale: 1 }}
-                animate={{ opacity: 0, scale: 1.5 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                r={node.r}
+                fill={node.color}
+                fillOpacity={node.primary ? 1 : 0.18}
+                stroke={node.color}
+                strokeWidth={node.primary ? 2 : 1.5}
+                filter={node.primary ? "url(#node-glow)" : undefined}
               />
-            )}
-
-            {/* Node fill */}
-            <circle
-              cx={node.cx}
-              cy={node.cy}
-              r={node.r}
-              fill={node.primary ? "var(--accent)" : "var(--bg-elevated)"}
-              stroke={node.primary ? "var(--accent-hover)" : "var(--border)"}
-              strokeWidth={node.primary ? "2" : "1"}
-              filter={node.primary ? "url(#glow)" : undefined}
-            />
-
-            {/* Label */}
-            <text
-              x={node.cx}
-              y={node.cy + node.r + 12}
-              textAnchor="middle"
-              fontSize="9"
-              fill="var(--text-muted)"
-              fontFamily="var(--font-mono)"
-            >
-              {node.label}
-            </text>
-          </g>
-        ))}
-      </svg>
-
-      {/* Decorative grid lines */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+              <text
+                x={node.cx}
+                y={node.cy + node.r + 14}
+                textAnchor="middle"
+                fontSize="11"
+                fontWeight="500"
+                fill="var(--text-secondary)"
+                fontFamily="var(--font-mono)"
+              >
+                {node.label}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
     </div>
   );
 }

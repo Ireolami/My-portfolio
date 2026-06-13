@@ -116,7 +116,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25, delay: i * 0.05, ease: EASE_OUT }}
                     >
-                      <ProjectCard {...project} />
+                      <ProjectCard {...project} featured={false} />
                     </m.div>
                   ))}
                 </div>

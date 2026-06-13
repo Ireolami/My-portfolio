@@ -1,8 +1,8 @@
 # Build Progress
 
-## Status: Phase 1 (Foundation) — 2026-06-12
-Currently working on: P-001 scaffold + P-002 tokens (completing together in session 1)
-Next up: P-008 MDX pipeline, P-009–P-011 case study content
+## Status: Phase 2 (Case studies + polish) — 2026-06-13
+Currently working on: nothing in-flight; case-study system shipped and verified
+Next up: P-012 projects FLIP polish, P-017 finish JSON-LD/sitemap/OG, P-018 Plausible goals
 
 ## Ticket Board
 | ID | Task | Status | Notes |
@@ -14,11 +14,11 @@ Next up: P-008 MDX pipeline, P-009–P-011 case study content
 | P-005 | Hero: word stagger, availability badge, CTA pair, SVG visual | ✅ done | DataFlowVisual SVG; reduced-motion safe |
 | P-006 | TrustBar with CountUp stats | ✅ done | Static numbers (CountUp pending animation) |
 | P-007 | ProjectCard component + 5 category variants | ✅ done | Category accent system + hover lift |
-| P-008 | MDX pipeline | ☐ todo | |
-| P-009 | Case study: KORVI | ☐ todo | |
-| P-010 | Case study: LSWC Water Analytics | ☐ todo | |
-| P-011 | Case study: ATS Pipeline | ☐ todo | |
-| P-012 | /projects index with filter pills | ☐ todo | |
+| P-008 | MDX pipeline | ✅ done | Built as typed case-study renderer (lib/case-studies.ts + /projects/[slug]) instead of MDX — 3 studies, type-safe, zero new deps, SSG |
+| P-009 | Case study: KORVI | ✅ done | Full Phase-5 framework; honest pre-pilot results ([PENDING] markers, no fabricated metrics) |
+| P-010 | Case study: LSWC Water Analytics | ✅ done | Full framework + architecture diagram + before/after table |
+| P-011 | Case study: ATS Pipeline | ✅ done | Full framework; GitHub-sourced 14hr/wk metric; links to repo |
+| P-012 | /projects index with filter pills | ✅ done | Filter pills + FLIP pill exist; fixed featured-card layout bug in grid |
 | P-013 | Capabilities section + Spotlight band + About teaser | ✅ done | All three built into homepage |
 | P-014 | /about page | ☐ todo | |
 | P-015 | /contact page (Resend server action) | ☐ todo | ContactSection stub built in homepage |
@@ -39,7 +39,24 @@ Next up: P-008 MDX pipeline, P-009–P-011 case study content
 
 ## Session Log (append-only, newest first)
 
-### Session 2026-06-13
+### Session 2026-06-13 (b) — case-study system + quality pass
+- Completed: P-008/009/010/011 — built the entire case-study system. New files:
+  - `lib/case-studies.ts` — typed CaseStudy model + content for korvi, lswc-water-analytics, ats-pipeline. Content grounded in CLAUDE §8 facts; KORVI (pre-pilot) uses [PENDING] markers instead of invented traction.
+  - `components/case-study/ArchitectureDiagram.tsx` — consistent horizontal pipeline diagram (vertical on mobile), category-accented.
+  - `components/case-study/CaseStudyTOC.tsx` — sticky scroll-spy TOC rail (desktop).
+  - `app/projects/[slug]/page.tsx` — SSG dynamic route, per-page metadata + Article JSON-LD, full Phase-5 layout (hero band, TL;DR, context, problem, approach, architecture + component table, decisions, challenges, before/after results table, lessons, future, footer CTA). Body is server-rendered always-visible (no scroll-gating) for SEO/reliability.
+  - `app/globals.css` — added `.cs-prose` / `.cs-list` styles.
+  - `app/icon.svg` — branded favicon (fixes favicon.ico 404).
+- Fixed (bugs found via headless-Chrome screenshots):
+  - ProjectCard: every "Read case study" link 404'd. Now case-study cards → /projects/[slug]; non-case-study cards → "View on GitHub"; none link to dead URLs.
+  - /projects grid: the 3 `featured` projects rendered with hero `md:flex-row` layout inside narrow grid columns, hiding their text. ProjectsClient now forces `featured={false}` in the grid.
+  - DataFlowVisual: was near-invisible on light theme. Rebuilt as a contained "SYSTEM MAP" panel with gradient edges, category-colored nodes, glowing primary node.
+  - Reveal/RevealGroup: reduced-motion now renders content immediately (plain div, no opacity:0/inView gating) so content can't get stuck hidden.
+- Verified: typecheck + lint + build all clean; 3 case studies prerender as static HTML; case-study first-load JS 134KB (< 150KB budget); no horizontal overflow at 390px on home/projects/case-study; screenshots reviewed at 1280 and 390.
+- Decisions: chose a typed case-study renderer over MDX for v1 — only 3 studies, fully type-checked, no contentlayer/next-mdx dependency, smaller bundle. Revisit MDX if non-dev editing or many studies are needed (blueprint already allows this fallback).
+- Not done / deferred: em-dash style sweep (rule §6) left as-is — ~60 occurrences are the owner's established voice in titles/prose; deferred rather than risk a damaging blind replace. Full sitemap/OG-image (@vercel/og) and Plausible goals still pending (P-017/P-018).
+
+### Session 2026-06-13 (a)
 - Completed: P-016 /resume page — 5 role-specific PDFs (Data Analyst, Data Engineer, AI & Automation, Data & Automation Analyst, GTM B2B) with color-coded download cards, Plausible tracking hook, bottom CTA to /contact
 - Files: app/resume/page.tsx, public/resumes/*.pdf (5 files)
 - Decisions: PDFs served from public/resumes/ with URL-safe names; `declare global Window.plausible` avoids `any` type; stagger animation via Framer Motion `m.div`
