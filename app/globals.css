@@ -62,15 +62,15 @@
   --shadow-btn-secondary: var(--_shadow-btn-secondary);
 }
 
-/* ─── Design tokens — dark default ─── */
+/* ─── Design tokens — light default ─── */
 :root {
-  --bg: #0a0a0b;
-  --bg-elevated: #111113;
-  --bg-subtle: #18181b;
-  --border: #27272a;
-  --text-primary: #fafafa;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --bg: #f5f4fe;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #ebe9fb;
+  --border: #cbc8ea;
+  --text-primary: #18181b;
+  --text-secondary: #4a4869;
+  --text-muted: #8884a8;
   --accent: #6e56cf;
   --accent-hover: #7c66dc;
   --accent-subtle: rgba(110, 86, 207, 0.12);
@@ -83,30 +83,30 @@
   --warn: #eab308;
   --error: #ef4444;
 
-  /* shadow scale — dark mode: use glow not drop-shadows */
-  --_shadow-card: 0 0 0 0px transparent;
-  --_shadow-card-hover: 0 0 28px rgba(110, 86, 207, 0.1);
-  --_shadow-header: 0 1px 0 rgba(255, 255, 255, 0.04);
-  --_shadow-btn-primary: 0 2px 16px rgba(110, 86, 207, 0.4);
-  --_shadow-btn-secondary: none;
-}
-
-/* ─── Light theme overrides ─── */
-[data-theme="light"] {
-  --bg: #f5f4fe;
-  --bg-elevated: #ffffff;
-  --bg-subtle: #ebe9fb;
-  --border: #cbc8ea;
-  --text-primary: #18181b;
-  --text-secondary: #4a4869;
-  --text-muted: #8884a8;
-
   /* shadow scale — light mode needs real depth */
   --_shadow-card: 0 1px 2px rgba(110, 86, 207, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06);
   --_shadow-card-hover: 0 4px 20px rgba(110, 86, 207, 0.14), 0 8px 32px rgba(0, 0, 0, 0.08);
   --_shadow-header: 0 1px 16px rgba(0, 0, 0, 0.08);
   --_shadow-btn-primary: 0 2px 12px rgba(110, 86, 207, 0.35);
   --_shadow-btn-secondary: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Dark theme overrides ─── */
+[data-theme="dark"] {
+  --bg: #0a0a0b;
+  --bg-elevated: #111113;
+  --bg-subtle: #18181b;
+  --border: #27272a;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  /* shadow scale — dark mode: glow instead of drop-shadows */
+  --_shadow-card: 0 0 0 0px transparent;
+  --_shadow-card-hover: 0 0 28px rgba(110, 86, 207, 0.1);
+  --_shadow-header: 0 1px 0 rgba(255, 255, 255, 0.04);
+  --_shadow-btn-primary: 0 2px 16px rgba(110, 86, 207, 0.4);
+  --_shadow-btn-secondary: none;
 }
 
 /* ─── Base styles ─── */
