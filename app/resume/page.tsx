@@ -177,7 +177,7 @@ export default function ResumePage() {
             <p className="text-sm text-text-secondary">Book a 20-min intro call — no prep needed.</p>
           </div>
           <Link
-            href="/contact"
+            href="/book"
             className="inline-flex items-center gap-2 nav-btn-primary flex-shrink-0"
           >
             Book a Call

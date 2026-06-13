@@ -79,7 +79,7 @@ export function Header() {
             <Download className="h-3.5 w-3.5" />
             Resume
           </Link>
-          <Link href="/contact" className="nav-btn-primary">
+          <Link href="/book" className="nav-btn-primary">
             Book a Call
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>

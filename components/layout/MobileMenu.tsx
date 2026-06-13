@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Menu, X, Download, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 
 const navLinks = [
   { href: "/projects", label: "Projects" },
@@ -84,14 +83,14 @@ export function MobileMenu() {
               </ul>
 
               <div className="flex flex-col gap-3 pt-6 border-t border-border">
-                <Button variant="secondary" size="md" className="w-full justify-center gap-2">
+                <Link href="/resume" onClick={() => setOpen(false)} className="nav-btn-secondary justify-center">
                   <Download className="h-4 w-4" />
                   Resume
-                </Button>
-                <Button variant="primary" size="md" className="w-full justify-center gap-2">
+                </Link>
+                <Link href="/book" onClick={() => setOpen(false)} className="nav-btn-primary justify-center">
                   Book a Call
                   <ArrowRight className="h-4 w-4" />
-                </Button>
+                </Link>
               </div>
             </m.nav>
           </>
