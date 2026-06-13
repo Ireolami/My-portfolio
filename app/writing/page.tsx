@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, BookOpen, FlaskConical, Cpu, GraduationCap, Wrench } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -44,12 +45,27 @@ function ArticleCard({ article }: { article: (typeof allArticles)[number] }) {
 
   const CardInner = (
     <article
-      className={`group flex flex-col gap-4 rounded-xl border bg-bg-elevated p-6 h-full transition-colors duration-200 ${
+      className={`group flex flex-col gap-4 rounded-xl border bg-bg-elevated overflow-hidden h-full card-shadow transition-colors duration-200 ${
         isDraft
           ? "border-border opacity-70"
           : "border-border hover:border-accent/30"
       }`}
     >
+      {/* Cover image */}
+      {article.image && (
+        <div className="relative w-full h-40 flex-shrink-0 overflow-hidden">
+          <Image
+            src={article.image}
+            alt={`${article.title} cover`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </div>
+      )}
+
+      {/* Content wrapper */}
+      <div className={`flex flex-col gap-4 flex-1 ${article.image ? "p-6 pt-0" : "p-6"}`}>
       {/* Top row: category chip + type + draft badge */}
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-1.5">
@@ -104,6 +120,7 @@ function ArticleCard({ article }: { article: (typeof allArticles)[number] }) {
           ))}
         </div>
       )}
+      </div>
     </article>
   );
 

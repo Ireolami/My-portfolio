@@ -32,8 +32,8 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-30 transition-all duration-300",
         scrolled
-          ? "border-b border-border bg-bg/80 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+          ? "bg-bg/85 backdrop-blur-xl border-b border-border shadow-[var(--_shadow-header)]"
+          : "bg-transparent border-b border-transparent"
       )}
     >
       <div className="container-content flex h-16 items-center justify-between">

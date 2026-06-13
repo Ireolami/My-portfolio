@@ -1,6 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ import type { Project, Category } from "@/lib/projects";
 
 type ProjectCardProps = Omit<Project, "shortTitle" | "caseStudy" | "demoUrl"> & {
   visualBg?: string;
+  image?: string;
 };
 
 const categoryAccent: Record<Category, string> = {
@@ -31,6 +33,7 @@ export function ProjectCard({
   githubUrl,
   featured = false,
   visualBg,
+  image,
 }: ProjectCardProps) {
   const accent = categoryAccent[category];
 
@@ -39,8 +42,8 @@ export function ProjectCard({
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
       className={cn(
-        "group relative flex flex-col rounded-xl border border-border bg-bg-elevated overflow-hidden",
-        "hover:border-[color:var(--accent)]/30 transition-colors duration-200",
+        "group relative flex flex-col rounded-xl border border-border bg-bg-elevated overflow-hidden card-shadow",
+        "hover:border-accent/30 transition-colors duration-200",
         featured && "md:flex-row"
       )}
     >
@@ -82,10 +85,19 @@ export function ProjectCard({
           aria-hidden="true"
         />
 
-        {/* TODO-CONTENT: owner to supply project screenshots/diagrams */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-xs font-mono text-text-muted opacity-40">[visual pending]</span>
-        </div>
+        {image ? (
+          <Image
+            src={image}
+            alt={`${title} screenshot`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-xs font-mono text-text-muted opacity-40">[visual pending]</span>
+          </div>
+        )}
       </div>
 
       {/* Content */}

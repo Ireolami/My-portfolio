@@ -10,6 +10,7 @@ export interface Article {
   date: string; // ISO date string e.g. "2024-03-15"
   readingTime?: string; // e.g. "8 min read"
   externalUrl?: string; // if hosted outside this site
+  image?: string; // path relative to /public, e.g. "/images/cover.jpg"
   tags?: string[];
   featured?: boolean;
   draft?: boolean;
@@ -27,6 +28,7 @@ export const articles: Article[] = [
     date: "2022-01-01",
     readingTime: "Peer-reviewed paper",
     externalUrl: "https://publications.umyu.edu.ng/scientifica/index.php/usci/article/view/469",
+    image: "/images/cover.jpg",
     tags: ["Biochemistry", "Microbiology", "Snake Venom", "Molecular Docking", "Antibacterial", "UMYU Scientifica"],
     featured: true,
   },

@@ -31,6 +31,8 @@ function WordStagger({ text }: { text: string }) {
         visible: { opacity: 1, y: 0 },
       };
 
+  const accentWords = new Set(["data", "AI"]);
+
   return (
     <m.h1
       className="text-text-primary"
@@ -42,7 +44,9 @@ function WordStagger({ text }: { text: string }) {
       {words.map((word, i) => (
         <m.span
           key={i}
-          className="inline-block mr-[0.28em] last:mr-0"
+          className={`inline-block mr-[0.28em] last:mr-0 ${
+            accentWords.has(word) ? "text-gradient" : ""
+          }`}
           variants={wordVariant}
           transition={{ duration: 0.25, ease: EASE_OUT }}
         >
@@ -59,13 +63,23 @@ export function Hero() {
       className="relative min-h-screen flex items-center pt-16"
       aria-labelledby="hero-heading"
     >
-      {/* Background subtle grain */}
+      {/* Background */}
       <div className="absolute inset-0 bg-bg" aria-hidden="true">
+        {/* Ambient glow blobs */}
         <div
-          className="absolute inset-0 opacity-[0.015]"
+          className="absolute inset-0 opacity-[0.18]"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%), radial-gradient(circle at 80% 20%, var(--cat-data) 0%, transparent 50%)",
+              "radial-gradient(ellipse 60% 50% at 15% 85%, var(--accent) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 85% 15%, var(--cat-data) 0%, transparent 60%)",
+          }}
+        />
+        {/* Subtle grid mesh */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
           }}
         />
       </div>

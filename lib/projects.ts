@@ -18,6 +18,7 @@ export interface Project {
   stack: string[];
   githubUrl?: string;
   demoUrl?: string;
+  image?: string; // path relative to /public, e.g. "/images/ATS.png"
   featured?: boolean;
   caseStudy?: boolean; // has a full /projects/[slug] page
 }
@@ -75,6 +76,7 @@ export const projects: Project[] = [
     ],
     stack: ["n8n", "GPT-4o", "Gmail API", "Google Sheets", "Webhooks"],
     githubUrl: "https://github.com/Ireolami/Applicant-Tracking-Sys",
+    image: "/images/ATS.png",
     featured: true,
     caseStudy: true,
   },
@@ -97,6 +99,7 @@ export const projects: Project[] = [
     ],
     stack: ["Python", "Pandas", "Scikit-learn", "Matplotlib", "Jupyter", "SciPy"],
     githubUrl: "https://github.com/Ireolami/Casual-Inference-Experimental-Analysis-",
+    image: "/images/Casual.png",
     caseStudy: false,
   },
   {
@@ -136,6 +139,7 @@ export const projects: Project[] = [
     ],
     stack: ["n8n", "LLM", "Vector Store", "Embeddings", "Webhooks"],
     githubUrl: "https://github.com/Ireolami/Retrieval-Augmented-Generator-RAG-",
+    image: "/images/RAG.png",
     caseStudy: false,
   },
   {

@@ -53,6 +53,13 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
+
+  /* Shadows — bridge internal vars to Tailwind shadow utilities */
+  --shadow-card: var(--_shadow-card);
+  --shadow-card-hover: var(--_shadow-card-hover);
+  --shadow-header: var(--_shadow-header);
+  --shadow-btn-primary: var(--_shadow-btn-primary);
+  --shadow-btn-secondary: var(--_shadow-btn-secondary);
 }
 
 /* ─── Design tokens — dark default ─── */
@@ -75,17 +82,31 @@
   --success: #22c55e;
   --warn: #eab308;
   --error: #ef4444;
+
+  /* shadow scale — dark mode: use glow not drop-shadows */
+  --_shadow-card: 0 0 0 0px transparent;
+  --_shadow-card-hover: 0 0 28px rgba(110, 86, 207, 0.1);
+  --_shadow-header: 0 1px 0 rgba(255, 255, 255, 0.04);
+  --_shadow-btn-primary: 0 2px 16px rgba(110, 86, 207, 0.4);
+  --_shadow-btn-secondary: none;
 }
 
 /* ─── Light theme overrides ─── */
 [data-theme="light"] {
-  --bg: #fafaf9;
+  --bg: #f5f4fe;
   --bg-elevated: #ffffff;
-  --bg-subtle: #f4f4f3;
-  --border: #e7e5e4;
+  --bg-subtle: #ebe9fb;
+  --border: #cbc8ea;
   --text-primary: #18181b;
-  --text-secondary: #52525b;
-  --text-muted: #a8a29e;
+  --text-secondary: #4a4869;
+  --text-muted: #8884a8;
+
+  /* shadow scale — light mode needs real depth */
+  --_shadow-card: 0 1px 2px rgba(110, 86, 207, 0.05), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --_shadow-card-hover: 0 4px 20px rgba(110, 86, 207, 0.14), 0 8px 32px rgba(0, 0, 0, 0.08);
+  --_shadow-header: 0 1px 16px rgba(0, 0, 0, 0.08);
+  --_shadow-btn-primary: 0 2px 12px rgba(110, 86, 207, 0.35);
+  --_shadow-btn-secondary: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* ─── Base styles ─── */
@@ -194,4 +215,26 @@ h3 {
 :root {
   scrollbar-color: var(--border) transparent;
   scrollbar-width: thin;
+}
+
+/* ─── Card elevation helper ─── */
+.card-shadow {
+  box-shadow: var(--_shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.card-shadow:hover {
+  box-shadow: var(--_shadow-card-hover);
+}
+
+/* ─── Section alternation: give sections a clearer seam in light mode ─── */
+[data-theme="light"] .section-seam {
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Accent gradient text helper ─── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--cat-ai) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

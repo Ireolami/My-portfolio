@@ -56,10 +56,19 @@ export function Capabilities() {
             const Icon = cap.icon;
             return (
               <RevealItem key={cap.title}>
-                <div className="flex flex-col gap-4 rounded-xl border border-border bg-bg-elevated p-6 h-full hover:border-[color:var(--border)]/80 transition-colors">
+                <div
+                  className="relative flex flex-col gap-4 rounded-xl border border-border bg-bg-elevated p-6 h-full card-shadow overflow-hidden group/cap"
+                  style={{ borderTopColor: cap.color }}
+                >
+                  {/* Top color stripe */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-0.5"
+                    style={{ backgroundColor: cap.color }}
+                    aria-hidden="true"
+                  />
                   {/* Icon */}
                   <div
-                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    className="flex h-10 w-10 items-center justify-center rounded-lg transition-transform duration-200 group-hover/cap:scale-110"
                     style={{ backgroundColor: `${cap.color}18` }}
                   >
                     <Icon className="h-5 w-5" style={{ color: cap.color }} />
