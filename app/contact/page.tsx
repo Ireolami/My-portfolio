@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const EMAIL = "smarworld25@gmail.com";
 const WHATSAPP_URL =
-  "https://wa.me/message/PLACEHOLDER?text=Hi%20Olayele%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.";
+  "https://wa.me/2349045232203?text=Hi%20Olayele%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.";
 
 const reasons = [
   {

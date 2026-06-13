@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 
 const EMAIL = "smarworld25@gmail.com";
-const WHATSAPP_URL = "https://wa.me/234?text=Hi%20Olayele%2C%20I%27d%20like%20to%20discuss%20a%20project.";
+const WHATSAPP_URL = "https://wa.me/2349045232203?text=Hi%20Olayele%2C%20I%27d%20like%20to%20discuss%20a%20project.";
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
