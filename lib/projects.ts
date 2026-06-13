@@ -57,6 +57,7 @@ export const projects: Project[] = [
       { value: "Real-time", label: "dashboard" },
     ],
     stack: ["Python", "MQTT", "PostgreSQL", "Power BI", "Docker"],
+    image: "/images/lswc-map.jpg",
     featured: true,
     caseStudy: true,
   },
