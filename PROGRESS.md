@@ -22,7 +22,7 @@ Next up: P-008 MDX pipeline, P-009–P-011 case study content
 | P-013 | Capabilities section + Spotlight band + About teaser | ✅ done | All three built into homepage |
 | P-014 | /about page | ☐ todo | |
 | P-015 | /contact page (Resend server action) | ☐ todo | ContactSection stub built in homepage |
-| P-016 | /resume page + 3 PDF variants | ☐ todo | |
+| P-016 | /resume page + 3 PDF variants | ✅ done | 5 role-based variants with download tracking hooks |
 | P-017 | SEO: metadata, JSON-LD, next-sitemap, @vercel/og | ◐ in-progress | Base metadata in layout.tsx; full schema pending |
 | P-018 | Plausible + 6 conversion goals | ☐ todo | |
 | P-019 | A11y pass (axe clean) | ☐ todo | |
@@ -38,6 +38,11 @@ Next up: P-008 MDX pipeline, P-009–P-011 case study content
 - Resume PDFs: 3 variants (Data Analyst / AI-Automation / Engineering)
 
 ## Session Log (append-only, newest first)
+
+### Session 2026-06-13
+- Completed: P-016 /resume page — 5 role-specific PDFs (Data Analyst, Data Engineer, AI & Automation, Data & Automation Analyst, GTM B2B) with color-coded download cards, Plausible tracking hook, bottom CTA to /contact
+- Files: app/resume/page.tsx, public/resumes/*.pdf (5 files)
+- Decisions: PDFs served from public/resumes/ with URL-safe names; `declare global Window.plausible` avoids `any` type; stagger animation via Framer Motion `m.div`
 
 ### Session 2026-06-12
 - Completed: P-001 scaffold (manual, no create-next-app; Tailwind v4 via @tailwindcss/postcss)
