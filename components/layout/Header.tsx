@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { m } from "framer-motion";
 import { Download, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./MobileMenu";
 
@@ -76,14 +75,18 @@ export function Header() {
         {/* Desktop CTAs + theme toggle */}
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Button variant="secondary" size="sm" className="gap-1.5">
-            <Download className="h-3.5 w-3.5" />
-            Resume
-          </Button>
-          <Button variant="primary" size="sm" className="gap-1.5">
-            Book a Call
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Button>
+          <Link href="/resume">
+            <button className="nav-btn-secondary">
+              <Download className="h-3.5 w-3.5" />
+              Resume
+            </button>
+          </Link>
+          <Link href="/contact">
+            <button className="nav-btn-primary">
+              Book a Call
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </Link>
         </div>
 
         {/* Mobile controls */}
