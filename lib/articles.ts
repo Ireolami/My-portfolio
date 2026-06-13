@@ -19,15 +19,15 @@ export const articles: Article[] = [
   // ── PUBLISHED EXTERNAL ───────────────────────────────────────────────────
   {
     slug: "umyu-scientifica-publication",
-    title: "[TODO-CONTENT: owner to supply paper title]",
+    title: "Antibacterial Activity and In Silico Molecular Prediction of Snake Venoms (Bitis arietans and Naja nigricollis) Against Some Clinical Bacterial Isolates",
     excerpt:
-      "[TODO-CONTENT: owner to supply abstract / one-line summary of the paper]",
+      "Investigating the antibacterial activity of crude venoms from Puff adder and Spitting cobra against multidrug-resistant gram-positive and gram-negative bacterial strains — using antibacterial screening, scanning electron microscopy, and molecular docking. Puff adder venom showed stronger activity than tested antibiotics, with an MIC of 8 g/ml against Staphylococcus aureus ATCC.",
     category: "research",
     type: "publication",
-    date: "[TODO-CONTENT: publication year e.g. 2024-01-01]",
+    date: "2022-01-01",
     readingTime: "Peer-reviewed paper",
     externalUrl: "https://publications.umyu.edu.ng/scientifica/index.php/usci/article/view/469",
-    tags: ["Research", "Peer-reviewed", "UMYU Scientifica"],
+    tags: ["Biochemistry", "Microbiology", "Snake Venom", "Molecular Docking", "Antibacterial", "UMYU Scientifica"],
     featured: true,
   },
 
