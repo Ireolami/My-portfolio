@@ -75,17 +75,13 @@ export function Header() {
         {/* Desktop CTAs + theme toggle */}
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Link href="/resume">
-            <button className="nav-btn-secondary">
-              <Download className="h-3.5 w-3.5" />
-              Resume
-            </button>
+          <Link href="/resume" className="nav-btn-secondary">
+            <Download className="h-3.5 w-3.5" />
+            Resume
           </Link>
-          <Link href="/contact">
-            <button className="nav-btn-primary">
-              Book a Call
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
+          <Link href="/contact" className="nav-btn-primary">
+            Book a Call
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
